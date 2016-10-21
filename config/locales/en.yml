@@ -21,3 +21,21 @@
 
 en:
   hello: "Hello world"
+  root_name: "E-Learning"
+  home: "Home"
+  words: "Words"
+  categories: "Categories"
+  users: "Users"
+  edit: "Edit"
+  pofile: "profile"
+  logout: "Logout"
+  login: "Login"
+  notifications: "Notifications"
+  wellcome: "Welcome to E-Learning System"
+  the: "the"
+  sigin_up_now: "Sign up now!"
+  birdth_day: "Birdthday"
+  address: "Address"
+  admin: "Admin"
+  activities: "Activities"
+
