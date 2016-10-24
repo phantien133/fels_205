@@ -1,3 +1,26 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
+.navbar-brand,
+.navbar-nav .hear-item {
+  line-height: 80px;
+  height: 80px;
+  padding-top: 0;
+  font-size:120%;
+}
+
+.header-nav-item {
+  position: relative;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.user-element{
+  line-height: 20px;
+  height: 20px;
+  padding-top: 0;
+}
+.top-space{
+  margin-top:90px;
+}

@@ -1,41 +1,50 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
   root_name: "E-Learning"
   home: "Home"
   words: "Words"
   categories: "Categories"
-  users: "Users"
+  users_all: "Users"
   edit: "Edit"
   pofile: "profile"
   logout: "Logout"
   login: "Login"
   notifications: "Notifications"
   wellcome: "Welcome to E-Learning System"
+  wellcome: "Welcome to E-Learning System , %{name}!"
+  wellcome_back: "Welcome back"
+  user_not_found: "User not found!!!"
   the: "the"
   sigin_up_now: "Sign up now!"
   birdth_day: "Birdthday"
   address: "Address"
   admin: "Admin"
   activities: "Activities"
-
+  e: "E-Learning"
+  nav: "Toggle navigation"
+  signup: "Sign up"
+  login_fail: "Invalid email/password combination"
+  goodbye: "Goodbye"
+  male: "Male"
+  female: "Female"
+  gay: "Gay"
+  lesbian: "Lesbian"
+  updated: "Updated"
+  error: "error"
+  shard:
+    error_message: "The form contains"
+  layouts:
+    login:
+      login: "Log in"
+      new: "New user?"
+      login: "Log in"
+      signup: "Sign up now!"
+      close: "Close"
+      remember_me: "Remember me"
+  users:
+    edit:
+      title: "Edit profile"
+      btn_text: "Update my profile"
+    new:
+      title: "Sign up"
+      btn_text: "Create my account"

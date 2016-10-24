@@ -1,80 +1,103 @@
-<nav class="navbar navbar-inverse navbar-fixed-top ">
-  <div class="container">
-    <div class="navbar-header">
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-custom" >
+  <div class="container" >
+    <div class="navbar-header" >
       <button type="button" class="navbar-toggle collapsed"
         data-toggle="collapse" data-target="#navbar"
-        aria-expanded="false" aria-controls="navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        aria-expanded="false" aria-controls="navbar" >
+        <span class="sr-only" > t nav: </span>
+        <span class="icon-bar" ></span>
+        <span class="icon-bar" ></span>
+        <span class="icon-bar" ></span>
       </button>
+        <%= link_to image_tag("elearning.png",
+          size: "130x80"), root_url %>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-         <a>
-           <i class="glyphicon glyphicon-home"></i>
-           <%= t :home %></a>
-        </li>
-        <li>
-          <a>
-            <i href="#words"
-              class="glyphicon glyphicon-folder-open"></i>
-            <%= t :words %>
-          </a>
-        </li>
-        <li>
-          <a href="#categories">
-            <i class="glyphicon glyphicon-folder-open"></i>
-            <%= t :categories %>
-          </a>
-        </li>
-        <li>
-          <a>
-            <i class="glyphicon glyphicon-th-list"></i>
-            <%= t :users %>
-          </a>
-        </li>
-        <li>
-          <a>
-            <i class="glyphicon glyphicon-king"></i>
-            <%= t :admin %>
-          </a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <i class="glyphicon glyphicon-user"></i>
-            <%= t :login %>
-          </a>
-        </li>
-        <li>
-          <a href="#"><i class="glyphicon glyphicon-log-in"></i>
-          <%= t :signin %></a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-            role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-user"></i>
-            <span class="caret">
-            </span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#"> <%= t :edit %>
-            <%= t :profile %></a></li>
-            <li><a href="#"> <%= t :logout %></a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header"> <%= t :notifications %></li>
-            <li>
-              <a><i class="glyphicon glyphicon-eye-open"></i>1</a>
+    <div id="navbar" class="navbar-collapse collapse" >
+      <ul class="nav navbar-nav" >
+        <% if logged_in? %>
+          <li class="header-nav-item" >
+            <a class="hear-item" >
+              <i href="#words"
+                class="glyphicon glyphicon-folder-open" >
+              </i>
+              <%= t :words %>
+            </a>
+          </li>
+          <li class="header-nav-item" >
+            <a class="hear-item" href="#categories" >
+              <i class="glyphicon glyphicon-folder-open" ></i>
+              <%= t :categories %>
+            </a>
+          </li>
+          <li class="header-nav-item" >
+            <a class="hear-item" >
+              <i class="glyphicon glyphicon-th-list" ></i>
+              <%= t :users_all %>
+            </a>
+          </li>
+          <% if current_user.admin? %>
+            <li class="header-nav-item" >
+              <a class="hear-item" >
+                <i class="glyphicon glyphicon-king" ></i>
+                <%= t :admin %>
+              </a>
             </li>
-            <li>
-              <a><i class="glyphicon glyphicon-eye-open"></i>2</a>
-            </li>
-          </ul>
-        </li>
+          <% end %>
+        <% end %>
       </ul>
-    </div><!--/.nav-collapse -->
+      <ul class="nav navbar-nav navbar-right" >
+        <% if logged_in? %>
+          <li class="dropdown" >
+            <a href="#"
+              class="dropdown-toggle hear-item"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true" aria-expanded="false" >
+              <i class="glyphicon glyphicon-user" ></i>
+              <%= current_user.name %>
+              <span class="caret" ></span>
+            </a>
+            <ul class="dropdown-menu" >
+              <li>
+                <a href="#" > <%= t :edit %>
+                  <%= t :profile %>
+                </a>
+              </li>
+              <li>
+                <%= link_to t(:logout), logout_path %>
+              </li>
+              <li role="separator" class="divider" ></li>
+              <li class="dropdown-header" >
+                <%= t :notifications %>
+              </li>
+              <li>
+                <a><i class="glyphicon glyphicon-eye-open" ></i>1</a>
+              </li>
+              <li>
+                <a><i class="glyphicon glyphicon-eye-open" ></i>2</a>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to signup_path, class: "hear-item" do %>
+              <i class="glyphicon glyphicon-edit" ></i>
+              <%= t :signup %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to login_path,
+              data: {toggle: "modal", target: "#login-modal"},
+              class: "hear-item" do %>
+              <i class="glyphicon glyphicon-log-in" ></i>
+              <%= t :login %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
   </div>
 </nav>
+<div class="top-space" >
+</div>

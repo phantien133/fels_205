@@ -32,14 +32,10 @@ class User < ApplicationRecord
 
   before_save :format_value
 
+  mount_uploader :avatar, PictureUploader
+
   private
     def format_value
       self.email = email.downcase
-      unless self.phone.nil?
-        self.phone.gsub! " ",""
-        self.phone.gsub! "-",""
-        self.phone.gsub! "(",""
-        self.phone.gsub! ")",""
-      end
     end
 end
