@@ -59,9 +59,10 @@
             </a>
             <ul class="dropdown-menu" >
               <li>
-                <a href="#" > <%= t :edit %>
+                <%= link_to edit_user_path(current_user) do %>
+                  <%= t :edit %>
                   <%= t :profile %>
-                </a>
+                <% end %>
               </li>
               <li>
                 <%= link_to t(:logout), logout_path %>

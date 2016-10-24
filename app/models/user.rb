@@ -60,6 +60,10 @@ class User < ApplicationRecord
     self.update_attribute :protected_digest, nil
   end
 
+  def is_user? other
+    self == other
+  end
+
   private
     def format_value
       self.email = email.downcase

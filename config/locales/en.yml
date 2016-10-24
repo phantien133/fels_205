@@ -35,6 +35,8 @@ en:
   user_not_found: "User not found!"
   please_login: "Please login!"
   access_denied: "Access denied!"
+  correct_user: "User not correct!"
+  user_not_correct: "User not correct."
   shard:
     error_message: "The form contains"
   layouts:
@@ -49,6 +51,7 @@ en:
     edit:
       title: "Edit profile"
       btn_text: "Update my profile"
+      update: "Update your profile"
     new:
       title: "Sign up"
       btn_text: "Create my account"

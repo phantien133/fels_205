@@ -15,12 +15,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-
-  def get_user
-    @user = User.find_by id: params[:id]
-    if @user.nil?
-      flash[:danger] = t :user_not_found
-      redirect_to root_path
-    end
-  end
 end
