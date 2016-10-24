@@ -15,9 +15,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    store_location
     @user = User.find_by id: params[:id]
     if @user.nil?
-      flash[:info] = t :user_not_found
+      flash[:danger] = t :user_not_found
       redirect_to root_url
     end
   end

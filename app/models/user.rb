@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :protected_token
   has_many :lessions
   has_many :activeties, dependent: :destroy
   has_many :active_relationships,
@@ -33,6 +34,31 @@ class User < ApplicationRecord
   before_save :format_value
 
   mount_uploader :avatar, PictureUploader
+
+  class << self
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
+
+    def digest string
+      cost = BCrypt::Engine::MIN_COST
+      BCrypt::Password.create string, cost: cost
+    end
+  end
+
+  def authenticated? token
+    return false if protected_digest.nil?
+    BCrypt::Password.new(self.protected_digest).is_password? token
+  end
+
+  def remember
+    self.protected_token = User.new_token
+    update_attribute :protected_digest, User.digest(protected_token)
+  end
+
+  def forget
+    self.update_attribute :protected_digest, nil
+  end
 
   private
     def format_value
