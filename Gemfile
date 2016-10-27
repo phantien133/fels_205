@@ -13,6 +13,7 @@ gem "jbuilder",     "2.4.1"
 gem "rails",          "5.0.0.1"
 gem "bootstrap-sass", "3.3.6"
 gem "faker",          "1.6.6"
+gem "config"
 
 gem "carrierwave",             "0.11.2"
 gem "mini_magick",             "4.5.1"
