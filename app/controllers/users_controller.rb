@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:destroy, :edit, :update]
-  before_action :get_user, except: [:new, :create]
+  before_action :get_user, except: [:new, :create, :index]
   before_action :correct_user, only: [:edit, :update]
   before_action :verify_admin, only: [:destroy]
 
@@ -31,6 +31,18 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       render :edit
+    end
+  end
+
+  def index
+    @users = User.search(params[:key]).paginate page: params[:page],
+      per_page: Settings.per_page
+  end
+
+  def destroy
+    unless @user.destroy
+      flash[:warning] = t :failed, name: @user.name
+      redirect_to users
     end
   end
 
