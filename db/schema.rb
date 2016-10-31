@@ -46,15 +46,16 @@ ActiveRecord::Schema.define(version: 20161021110505) do
     t.index ["result_id"], name: "index_choices_on_result_id"
   end
 
-  create_table "lessions", force: :cascade do |t|
+  create_table "lessons", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "category"
+    t.integer  "category_id"
     t.string   "name"
     t.integer  "number_of_words"
     t.integer  "time"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["user_id"], name: "index_lessions_on_user_id"
+    t.index ["category_id"], name: "index_lessons_on_category_id"
+    t.index ["user_id"], name: "index_lessons_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
