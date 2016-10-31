@@ -37,6 +37,11 @@ en:
   access_denied: "Access denied!"
   correct_user: "User not correct!"
   user_not_correct: "User not correct."
+  search: "Search"
+  user: "User"
+  confirm_delete: "Are you sure to delete : %{type} : %{name}?"
+  failed_connect_to_server: "Failde to connect to server"
+  delete: "Delete"
   shard:
     error_message: "The form contains"
   layouts:
@@ -52,6 +57,15 @@ en:
       title: "Edit profile"
       btn_text: "Update my profile"
       update: "Update your profile"
+      failed: "Failde to delete user %{name}"
     new:
       title: "Sign up"
       btn_text: "Create my account"
+    index:
+      placeholder: "Enter here"
+      all: "All users"
+      deleted: "User : %{name} be deleted"
+      failed: "Failde to delete user %{name}"
+    user:
+      follow: "Follow"
+

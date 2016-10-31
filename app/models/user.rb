@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :protected_token
   has_many :lessions
-  has_many :activeties, dependent: :destroy
+  has_many :activities, dependent: :destroy
   has_many :active_relationships,
     class_name: Relationship.name,
     foreign_key: :follower_id,
@@ -34,6 +34,8 @@ class User < ApplicationRecord
   before_save :format_value
 
   mount_uploader :avatar, PictureUploader
+
+  scope :search, ->keyword {where "name LIKE ?", "%#{keyword}%"}
 
   class << self
     def new_token

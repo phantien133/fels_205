@@ -1,1 +1,5 @@
 remember_me: 1
+per_page: 16
+
+default_user_image: "user-big.jpg"
+default_favicon_image: "elearning.png"

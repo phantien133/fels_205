@@ -16,32 +16,34 @@
       <ul class="nav navbar-nav" >
         <% if logged_in? %>
           <li class="header-nav-item" >
-            <a class="hear-item" >
+            <a class="hear-item">
               <i href="#words"
-                class="glyphicon glyphicon-folder-open" >
+                class="glyphicon glyphicon-book" >
               </i>
               <%= t :words %>
             </a>
           </li>
           <li class="header-nav-item" >
-            <a class="hear-item" href="#categories" >
+            <%= link_to "#", data: {turbolinks: false},
+              class: "hear-item" do %>
               <i class="glyphicon glyphicon-folder-open" ></i>
               <%= t :categories %>
-            </a>
-          </li>
-          <li class="header-nav-item" >
-            <a class="hear-item" >
-              <i class="glyphicon glyphicon-th-list" ></i>
-              <%= t :users_all %>
-            </a>
+            <% end %>
           </li>
           <% if current_user.admin? %>
             <li class="header-nav-item" >
-              <a class="hear-item" >
+              <a type="button" class="btn hear-item"
+                data-toggle="collapse" data-target="#admin">
                 <i class="glyphicon glyphicon-king" ></i>
-                <%= t :admin %>
+                <%= t :admin, class: "hear-item" %>
               </a>
             </li>
+          <% elsif %>
+            <%= link_to users_path, data: {turbolinks: false},
+              class: "hear-item" do %>
+              <i class="glyphicon glyphicon-th-list" ></i>
+              <%= t :users_all %>
+            <% end %>
           <% end %>
         <% end %>
       </ul>
@@ -95,6 +97,40 @@
             <% end %>
           </li>
         <% end %>
+      </ul>
+    </div>
+    <div id="admin" class="collapse">
+      <ul class="nav navbar-nav" >
+        <li class="header-nav-item" >
+          <a class="hear-item">
+            <i href="#words"
+              class="glyphicon glyphicon-list-alt" >
+            </i>
+            <%= t :words %>
+          </a>
+        </li>
+        <li class="header-nav-item" >
+          <a class="hear-item">
+            <i href="#words"
+              class="glyphicon glyphicon-plus" >
+            </i>
+            <%= t :lesson %>
+          </a>
+        </li>
+        <li class="header-nav-item" >
+          <%= link_to "#",
+            class: "hear-item" do %>
+            <i class="glyphicon glyphicon-cog" ></i>
+            <%= t :categories %>
+          <% end %>
+        </li>
+        <li class="header-nav-item" >
+          <%= link_to users_path, data: {turbolinks: false},
+            class: "hear-item" do %>
+            <i class="glyphicon glyphicon-lock" ></i>
+            <%= t :users_all %>
+          <% end %>
+        </li>
       </ul>
     </div>
     <!--/.nav-collapse -->
