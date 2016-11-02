@@ -12,4 +12,13 @@ Rails.application.routes.draw do
   get "/logout",  to: "sessions#destroy"
 
   resources :categories
+
+  resources :lessons do
+    resources :results
+    post "start_lesson", to: "results#create"
+    get "test", to: "results#edit"
+    post "test", to: "results#update"
+  end
+
+  resources :words
 end

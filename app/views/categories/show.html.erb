@@ -52,8 +52,6 @@
       </table>
     </div>
   </div>
-  <div class="col-md-2 col-xs-0">
-  </div>
 </div>
 <div class="modal fade" id="new-lesson-modal" role="dialog">
     <div class="modal-dialog">
@@ -114,7 +112,7 @@
         </h3>
       </div>
       <div class="modal-body">
-        <%= form_for @word, create_word_path do |f| %>
+        <%= form_for @word do |f| %>
           <div class="form-group">
             <%= f.label :content %>
             <%= f.text_area :content ,class: "form-control" %>
@@ -130,9 +128,8 @@
               <div id="answer_0">
               </div>
               <hr>
-              <label class="btn btn-default form-control"
-                id="btn_add_new_answer" onclick="add_new_answer('<%= t ".answer" %>',
-                '<%= t ".correct" %>')">
+              <label class="btn btn-default form-control" id="btn_add_new_answer"
+                onclick="add_new_answer('<%= t ".answer" %>','<%= t ".correct" %>')">
                 <i class="glyphicon glyphicon-edit"></i>
                 <%= t ".new_answers" %>
               </label>

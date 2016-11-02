@@ -3,7 +3,6 @@ class CreateResults < ActiveRecord::Migration[5.0]
     create_table :results do |t|
       t.references :user, foreign_key: true
       t.references :lession, foreign_key: true
-      t.references :word_id, foreign_key: true
 
       t.timestamps
     end

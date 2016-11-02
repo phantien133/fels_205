@@ -3,6 +3,7 @@ class CreateChoices < ActiveRecord::Migration[5.0]
     create_table :choices do |t|
       t.references :result, foreign_key: true
       t.references :anser, foreign_key: true
+      t.references :word_id, foreign_key: true
 
       t.timestamps
     end

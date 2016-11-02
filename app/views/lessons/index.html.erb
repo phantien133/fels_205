@@ -1,0 +1,66 @@
+<% provide :title, t(".title")%>
+<div class="row">
+</div>
+<div class="row">
+  <div class="col-md-2 col-xs-12">
+    <h1><%= t ".title" %></h1>
+  </div>
+  <div class="col-md-10 col-xs-12">
+    <div class="row">
+      <%= form_tag lessons_path, method: :get, id: "search_category_form" do %>
+        <div class="form-inline pull-right">
+          <div class="form-group">
+            <%= label_tag :Category %>
+            <%= select_tag "category_id",
+              options_from_collection_for_select(Category.all,
+              "id", "name", params[:category_id]), include_blank: t("all"),
+              class: "form-control",
+              onchange: "search_lessons_by_category_id(this);",
+              id: "select_category_id"%>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <%= text_field_tag :key, params[:key],
+                class: "form-control",placeholder: t(:search_placeholder),
+                id:"search_lessons" %>
+              <div class="input-group-btn">
+                <%= submit_tag t(:search), class: "btn btn-info" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+    <hr>
+    <div class="row">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th><%= t :id %></th>
+            <th><%= t :content %></th>
+            <th><%= t :category %></th>
+            <th><%= t ".number_of_word" %></th>
+            <th><%= t ".time" %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <div class="alert alert-danger hide" id="connect_failed">
+          <label >
+            <%= t :failed_connection %>
+          </label>
+        </div>
+        <tbody id="result_search">
+          <% if @lessons.any? %>
+              <%= render @lessons %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row text-center" id="will_paginate">
+        <%= will_paginate @lessons %>
+      </div>
+    </div>
+  </div>
+</div>
+

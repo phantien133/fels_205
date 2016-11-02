@@ -27,7 +27,20 @@ User.create!(
 end
 50.times do |n|
   name = Faker::Name.name
-  Category.create!(
-    name: name
-  )
+  Category.create! name: name
+end
+category = Category.first
+50.times do |n|
+  word = Word.create content: Faker::Name.name, category_id: category.id
+  if n % 2 == 0
+    5.times do |m|
+      correct = m % 2 == 1 ? true : false
+      word.answers.create content: Faker::Name.name, correct: correct
+    end
+  else
+    5.times do |m|
+      correct = m ==3 ? true : false
+      word.answers.create content: Faker::Name.name, correct: correct
+    end
+  end
 end
