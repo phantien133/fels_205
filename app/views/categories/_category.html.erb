@@ -1,0 +1,25 @@
+<tr id="tr_category_id_<%= category.id %>">
+  <td><%= category.id %></td>
+  <td>
+    <p id="td_name_category_id_<%= category.id %>">
+      <%= link_to category.name,category %>
+    </p>
+  </td>
+  <td><%= category.lessons.length %></td>
+  <td><%= category.created_at %></td>
+  <td>
+    <%= link_to category, class: "btn btn-default" do %>
+      <i class='glyphicon glyphicon-eye-open'></i>
+    <% end %>
+    <% if logged_in? && current_user.admin? %>
+      <%= link_to edit_category_path(category),
+        class: "btn btn-warning" do %>
+        <i class='glyphicon glyphicon-edit'></i>
+      <% end %>
+      <%= button_tag class: "btn btn-danger",
+        onclick: "delete_category('#{category.id}','#{category.name}')" do %>
+        <i class='glyphicon glyphicon-remove-circle'></i>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

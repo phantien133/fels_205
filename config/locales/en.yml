@@ -2,9 +2,6 @@ en:
   hello: "Hello world"
   root_name: "E-Learning"
   home: "Home"
-  words: "Words"
-  categories: "Categories"
-  users_all: "Users"
   edit: "Edit"
   pofile: "profile"
   logout: "Logout"
@@ -42,6 +39,22 @@ en:
   confirm_delete: "Are you sure to delete : %{type} : %{name}?"
   failed_connect_to_server: "Failde to connect to server"
   delete: "Delete"
+  search_placeholder: "Enter here"
+  show: "show"
+  error: "error"
+  created_at: "created"
+  created_category: "Created category: %{name}"
+  deleted: "Deleted"
+  delete_failed: "Delete failed"
+  correct_user: "User is not correct!"
+  add_new: "Add new"
+  not_update: "Not update"
+  save: "Save"
+  header:
+    categories: "Categories"
+    words: "Words"
+    users: "Users"
+    lessons: "Lessons"
   shard:
     error_message: "The form contains"
   layouts:
@@ -62,10 +75,36 @@ en:
       title: "Sign up"
       btn_text: "Create my account"
     index:
+      title: "All Users"
       placeholder: "Enter here"
       all: "All users"
       deleted: "User : %{name} be deleted"
       failed: "Failde to delete user %{name}"
     user:
       follow: "Follow"
-
+  categories:
+    show:
+      title: "Category | %{name}"
+      category: "Category"
+      save: "Save"
+      number_of_words: "Number of words"
+      time: "time"
+      new_lesson: "New lesson"
+      btn_text: "Create Lesson"
+      add_new_lesson: "Add new lesson"
+      lesson: "Lesson"
+      edit_name: "Edit category name"
+      answer: "Answer"
+      button_create_word: "Create word"
+      correct: "Correct"
+    index:
+      title: "All Categories"
+      category_name: "Category name"
+      add_new_category: "Add new category"
+      new: "New"
+      btn_text: "Create new category"
+    edit:
+      title: "Edit category | %{name}"
+      btn_text: "Update category"
+    show:
+      btn_text: "Update category"

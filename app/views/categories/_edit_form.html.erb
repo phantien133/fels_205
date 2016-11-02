@@ -1,0 +1,13 @@
+<%= form_for @category, edit_category_path(@category) do |f|%>
+  <div class="input-group">
+    <%= f.text_field :name ,class: "form-control"%>
+    <div class="input-group-btn">
+      <%= f.submit yield(:button_text), class: "btn btn-success" do %>
+        <i class="glyphicon glyphicon-saved"></i>
+      <% end %>
+      <label>
+        <i class="glyphicon glyphicon-remove-circle"></i>
+      </label>
+    </div>
+  </div>
+<% end %>

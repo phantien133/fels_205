@@ -20,14 +20,14 @@
               <i href="#words"
                 class="glyphicon glyphicon-book" >
               </i>
-              <%= t :words %>
+              <%= t ".words" %>
             </a>
           </li>
           <li class="header-nav-item" >
             <%= link_to "#", data: {turbolinks: false},
               class: "hear-item" do %>
               <i class="glyphicon glyphicon-folder-open" ></i>
-              <%= t :categories %>
+              <%= t ".lessons" %>
             <% end %>
           </li>
           <% if current_user.admin? %>
@@ -42,7 +42,7 @@
             <%= link_to users_path, data: {turbolinks: false},
               class: "hear-item" do %>
               <i class="glyphicon glyphicon-th-list" ></i>
-              <%= t :users_all %>
+              <%= t ".users" %>
             <% end %>
           <% end %>
         <% end %>
@@ -106,7 +106,7 @@
             <i href="#words"
               class="glyphicon glyphicon-list-alt" >
             </i>
-            <%= t :words %>
+            <%= t ".words" %>
           </a>
         </li>
         <li class="header-nav-item" >
@@ -114,21 +114,21 @@
             <i href="#words"
               class="glyphicon glyphicon-plus" >
             </i>
-            <%= t :lesson %>
+            <%= t ".lessons" %>
           </a>
         </li>
         <li class="header-nav-item" >
-          <%= link_to "#",
+          <%= link_to categories_path, data: {turbolinks: false},
             class: "hear-item" do %>
             <i class="glyphicon glyphicon-cog" ></i>
-            <%= t :categories %>
+            <%= t ".categories" %>
           <% end %>
         </li>
         <li class="header-nav-item" >
           <%= link_to users_path, data: {turbolinks: false},
             class: "hear-item" do %>
             <i class="glyphicon glyphicon-lock" ></i>
-            <%= t :users_all %>
+            <%= t ".users" %>
           <% end %>
         </li>
       </ul>
