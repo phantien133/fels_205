@@ -1,0 +1,29 @@
+  <tr id="tr_lesson_id_<%= lesson.id %>">
+  <td><%= lesson.id %></td>
+  <td id="td_name_lesson_id_<%= lesson.id %>">
+    <%= link_to lesson.name, lesson %>
+  </td>
+  <td><%= lesson.category.name %></td>
+  <td><%= lesson.number_of_words %></td>
+  <td><%= lesson.time %></td>
+  <td>
+    <% if logged_in? %>
+      <%= button_to lesson_start_lesson_path(lesson.id),
+        class: "btn btn-default" do %>
+        <i class='glyphicon glyphicon-education'></i>
+        <%= t ".start_lesson" %>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <% if logged_in? && current_user.admin? %>
+      <%= link_to edit_lesson_path(lesson), class: "btn btn-warning" do %>
+        <i class='glyphicon glyphicon-edit'></i>
+      <% end %>
+      <%= button_tag class: "btn btn-danger",
+        onclick: "delete_lesson('#{lesson.id}','#{lesson.name}')" do %>
+        <i class='glyphicon glyphicon-remove-circle'></i>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

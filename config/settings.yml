@@ -3,3 +3,8 @@ per_page: 16
 
 default_user_image: "user-big.jpg"
 default_favicon_image: "elearning.png"
+
+min_time: 0
+min_words: 0
+
+words: 20

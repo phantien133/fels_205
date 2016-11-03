@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(version: 20161021110505) do
   create_table "choices", force: :cascade do |t|
     t.integer  "result_id"
     t.integer  "anser_id"
+    t.integer  "word_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["anser_id"], name: "index_choices_on_anser_id"
     t.index ["result_id"], name: "index_choices_on_result_id"
+    t.index ["word_id_id"], name: "index_choices_on_word_id_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -68,12 +70,10 @@ ActiveRecord::Schema.define(version: 20161021110505) do
   create_table "results", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "lession_id"
-    t.integer  "word_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lession_id"], name: "index_results_on_lession_id"
     t.index ["user_id"], name: "index_results_on_user_id"
-    t.index ["word_id_id"], name: "index_results_on_word_id_id"
   end
 
   create_table "users", force: :cascade do |t|
