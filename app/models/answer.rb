@@ -2,6 +2,6 @@ class Answer < ApplicationRecord
   belongs_to :word
   validates :content,
     presence: true,
-    length: {maximum: 1000},
+    length: {maximum: Settings.max_length_of_content.to_i},
     allow_nil: true
 end

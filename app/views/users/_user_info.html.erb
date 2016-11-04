@@ -1,0 +1,34 @@
+<div class="col-md-2 col-xs-12 text-center">
+    <div class="form-group">
+      <% if @user.avatar? %>
+        <%= link_to image_tag(@user.avatar, alt: "@user.name", size: "130x130",
+          class: "avatar"), @user %>
+      <% else %>
+        <%= link_to image_tag(Settings.default_user_image, alt: @user.name,
+          size: "130x130", class: "avatar" ), @user %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <%= link_to user_following_index_path(@user), data: {turbolinks: false} do %>
+        <strong id="following">
+          <%= @user.following.count %>
+        </strong>
+          <%= t ".following" %>
+      <% end %>
+      <strong> | </strong>
+      <%= link_to user_followers_path(@user), data: {turbolinks: false} do %>
+        <strong id="followers">
+          <%= @user.followers.count %>
+        </strong>
+          <%= t ".followers" %>
+      <% end %>
+    </div>
+    <div class="form-group" id="follow_form">
+      <%= render "users/follow_form" if logged_in? %>
+    </div>
+</div>
+<div class="col-md-3 col-xs-12">
+    <h3 class="user-name"><label><%=  @user.name %></label></h3>
+    <h4><%= t ".birthday", birthday: @user.birthday %></h4>
+    <h4><%= t ".address", address: @user.address %></h4>
+</div>

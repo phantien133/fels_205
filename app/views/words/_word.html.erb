@@ -1,9 +1,22 @@
 <tr id="tr_word_id_<%= word.id %>" data-toggle="collapse"
   data-target="#answers_word_id_<%= word.id %>" >
-  <td><%= link_to word.id,edit_word_path(word) %></td>
-  <td><%= word.content %></td>
-  <td><%= word.category.name %></td>
+  <td><%= word.id %></td>
+  <td><%= link_to word.content, edit_word_path(word) %></td>
+  <td><%= link_to word.category.name, word.category %></td>
   <td><%= word.created_at %></td>
+  <% if logged_in? && current_user.admin? %>
+    <td>
+      <%= link_to edit_word_path(word), class: "btn btn-warning" do %>
+        <i class='glyphicon glyphicon-edit'></i>
+      <% end %>
+    </td>
+    <td>
+      <%= button_tag class: "btn btn-danger",
+        onclick: "delete_word('#{word.id}','#{word.content}')" do %>
+        <i class='glyphicon glyphicon-remove-circle'></i>
+      <% end %>
+    </tb>
+  <% end %>
 </tr>
 <tr id="answers_word_id_<%= word.id %>" class="collapse">
   <td></td>

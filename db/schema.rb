@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021110505) do
+ActiveRecord::Schema.define(version: 20161108091548) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "tagget_id"
-    t.string   "tagget_type"
+    t.integer  "target_id"
+    t.string   "target_type"
     t.string   "action_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -35,17 +35,18 @@ ActiveRecord::Schema.define(version: 20161021110505) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "deleted"
   end
 
   create_table "choices", force: :cascade do |t|
     t.integer  "result_id"
-    t.integer  "anser_id"
-    t.integer  "word_id_id"
+    t.integer  "answer_id"
+    t.integer  "word_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["anser_id"], name: "index_choices_on_anser_id"
+    t.index ["answer_id"], name: "index_choices_on_answer_id"
     t.index ["result_id"], name: "index_choices_on_result_id"
-    t.index ["word_id_id"], name: "index_choices_on_word_id_id"
+    t.index ["word_id"], name: "index_choices_on_word_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20161021110505) do
     t.integer  "time"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.boolean  "deleted"
     t.index ["category_id"], name: "index_lessons_on_category_id"
     t.index ["user_id"], name: "index_lessons_on_user_id"
   end
@@ -69,10 +71,11 @@ ActiveRecord::Schema.define(version: 20161021110505) do
 
   create_table "results", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "lession_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lession_id"], name: "index_results_on_lession_id"
+    t.integer  "lesson_id"
+    t.boolean  "finished",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["lesson_id"], name: "index_results_on_lesson_id"
     t.index ["user_id"], name: "index_results_on_user_id"
   end
 
@@ -94,8 +97,9 @@ ActiveRecord::Schema.define(version: 20161021110505) do
   create_table "words", force: :cascade do |t|
     t.integer  "category_id"
     t.text     "content"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "deleted",     default: false
     t.index ["category_id"], name: "index_words_on_category_id"
   end
 

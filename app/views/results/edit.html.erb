@@ -1,0 +1,29 @@
+<% provide :title, t(".title", name: @lesson.name) %>
+<div class="row">
+  <div class="col-md-2 col-xs-12" id="on-test-element">
+    <div class="panel panel-info fixed">
+      <div class="panel-heading">
+        <%= t ".progress" %>
+      </div>
+      <div class="panel-heading panel-success text-center">
+        <label>
+          <h2>
+            <i id="test-progress">0</i>
+            <i>/<%= @lesson.number_of_words %></i>
+          </h2>
+        </label>
+      </div>
+      <div class="panel-body">
+        <h2 id="countdown-timer" class="text-center">00:00</h2>
+        <div id="status-test"></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-10 col-xs-12" id="body-answers-sheed">
+    <%= render "form" %>
+  </div>
+</div>
+<script type="text/javascript">
+  countdownTimer(<%= @time_remaining %>);
+</script>

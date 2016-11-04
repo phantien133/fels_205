@@ -1,31 +1,58 @@
 <% provide :title, t(".title") %>
-<h1><%= t ".all" %></h1>
-
+<% provide :button_text, t(".button_text") %>
+<h1 class="text-center"><%= t ".all" %></h1>
+<hr>
 <div class="row">
-  <%= form_tag words_path, method: :get, id: "words_search_form" do %>
-    <div class="row panel form-inline pull-right">
-      <div class="form-group">
-        <%= label_tag :Category %>
-        <%= select_tag "category_id",
-          options_from_collection_for_select(Category.all, "id", "name",
-            params[:category_id]),
-          include_blank: t("all"),
-          class: "form-control form-small",
-          onchange: "search_words_by_category_id(this);", id: "select_category_id" %>
-      </div>
-      <div class="input-group">
-        <%= text_field_tag :key, params[:key],
-          class: "form-control",placeholder: "Enter here", id:"search_words" %>
-        <div class="input-group-btn">
-          <%= submit_tag t(:search), class: "btn btn-info" %>
-        </div>
-      </div>
+  <% if logged_in? && current_user.admin? %>
+    <div class="pull-left">
+      <%= link_to "#",
+        data: {toggle: "modal", target: "#new-word-modal"},
+        class: "btn btn-primary" do %>
+        <i class="glyphicon glyphicon-pencil" ></i>
+        <%= t ".add_new_word" %>
+      <% end %>
     </div>
   <% end %>
+  <div>
+
+  </div>
+  <div class="pull-right">
+    <%= form_tag words_path, method: :get, id: "words_search_form" do %>
+      <div class="row panel form-inline">
+        <% if logged_in? %>
+          <div class="form-group">
+            <% Settings.filter_words.each do |key, value| %>
+              <%= label_tag value, class: "radio-inline" do %>
+                <%= radio_button_tag :condition, value,
+                  checked = params[:condition] == value || params[:condition].blank?,
+                  onchange: "submit_words_search_form();" %>
+                <%= value.titleize %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= label_tag :Category %>
+          <%= select_tag "category_id",
+            options_from_collection_for_select(@all_categories, "id", "name",
+              params[:category_id]),
+            include_blank: t("all"),
+            class: "form-control form-small",
+            onchange: "submit_words_search_form();", id: "select_category_id" %>
+        </div>
+        <div class="input-group">
+          <%= text_field_tag :key, params[:key],
+            class: "form-control", placeholder: t(:search_placeholder), id:"search_words" %>
+          <div class="input-group-btn">
+            <%= submit_tag t(:search), class: "btn btn-info" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 <div class="row">
   <table class="table table-hover table-striped">
-
     <thead>
       <tr>
         <th><%= t :id %></th>
@@ -34,23 +61,45 @@
         <th><%= t :created_at %></th>
       </tr>
     </thead>
-
     <div class="alert alert-danger hide" id="connect_failed">
       <label >
         <%= t :failed_connection %>
       </label>
     </div>
-
     <tbody id="result_search">
       <% if @words.any? %>
           <%= render @words %>
       <% end %>
     </tbody>
-
   </table>
-
   <div class="row text-center" id="will_paginate">
     <%= will_paginate @words %>
   </div>
-
 </div>
+<% if logged_in? && current_user.admin? %>
+  <div class="row">
+    <div class="modal fade" id="new-word-modal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            <h3 class="modal-title glyphicon glyphicon-edit">
+              <%= t :word %>
+            </h3>
+          </div>
+          <div class="modal-body">
+            <%= render "form" %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+              data-dismiss="modal">
+              <%= t ".close" %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

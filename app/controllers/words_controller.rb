@@ -1,47 +1,71 @@
 class WordsController < ApplicationController
   before_action :logged_in_user, only: [:destroy, :edit, :update]
-  before_action :verify_admin, only: [:destroy]
-  before_action :load_word, only: [:edit, :update]
+  before_action :verify_admin, except: [:index, :show]
+  before_action :load_word, only: [:edit, :update, :destroy]
+  before_action :load_all_categories, only: [:index, :new, :edit]
+
+  def index
+    store_location
+    @words = if params[:condition].present? &&
+      params[:condition]  != t("get_all") && logged_in?
+      Word.unscoped.send(params[:condition], current_user.id)
+    else
+      Word.all
+    end.of_category(params[:category_id]).search_by_content(params[:key])
+      .includes(:answers).paginate page: params[:page],
+      per_page: Settings.per_page
+    @word = Word.new if logged_in? && current_user.admin?
+  end
 
   def new
     @word = Word.new
   end
 
-  def edit
+  def create
+    @word = Word.new word_params
+    if @word.save &&
+      if @word.update_attributes(answers_params)
+        flash[:success] = t :created_at
+        redirect_to session[:forwarding_url] || new_word_path and return
+      else
+        @word.destroy
+      end
+    end
+    flash[:warning] = @word.errors.full_messages.join ".<br>"
+    redirect_to new_word_path
+  end
 
+  def edit
   end
 
   def update
-    if @word.update_attributes(answers_params)
+    if @word.update_attributes word_answers_params
       flash[:success] = t :updated
       redirect_to session[:forwarding_url] || words_path
     else
-      flash[:warning] = @word.errors.full_messages.join ".\n"
-      redirect_to edit_word_path(@words)
+      flash[:warning] = @word.errors.full_messages.join ".<br>"
+      redirect_to edit_word_path @word
     end
   end
 
-  def create
-    @word = Word.new word_params
-    if @word.save &&  @word.update_attributes(answers_params)
-      flash[:success] = t :created_at
-      redirect_to session[:forwarding_url] || new_word_path and return
-    else
-      flash[:warning] = @word.errors.full_messages.join ".\n"
-      redirect_to new_word_path
+  def destroy
+    respond_to do |format|
+      format.json do
+        if @word.destroy
+          render json: {status: t(:deleted)}
+        else
+          render json: {status: t(:delete_failed)}
+        end
+      end
     end
-  end
-
-  def index
-    @words = if params[:category_id]
-      Word.of_category(params[:category_id])
-        .search_by_content(params[:key])
-    else
-      Word.search_by_content(params[:key])
-    end.paginate page: params[:page],per_page: Settings.per_page
   end
 
   private
+  def word_answers_params
+    params.require(:word) .permit :content,:category_id,
+      answers_attributes: [:id, :content, :correct, :_destroy]
+  end
+
   def word_params
     params.require(:word)
       .permit :content,:category_id
@@ -49,7 +73,7 @@ class WordsController < ApplicationController
 
   def answers_params
     params.require(:word)
-      .permit answers_attributes: [:content, :correct]
+      .permit answers_attributes: [:id, :content, :correct]
   end
 
   def load_word
@@ -58,5 +82,9 @@ class WordsController < ApplicationController
       flash[:danger] = t :word_not_found
       redirect_to words_path
     end
+  end
+
+  def load_all_categories
+    @all_categories = Category.all
   end
 end

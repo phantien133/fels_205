@@ -11,3 +11,16 @@ words: 20
 
 true_str: "true"
 false_str: "false"
+
+time_laster_for_submit: -3
+finish_submit: "finish"
+
+small_avatar: "100x100"
+mini_avater: "40x40"
+
+max_length_of_content: 1000
+
+filter_words:
+  learned: "learned"
+  not_learned: "not_learned"
+  get_all: "get_all"

@@ -1,0 +1,41 @@
+<% if activity %>
+    <li class="well">
+      <% if activity.user.avatar? %>
+        <%= link_to image_tag(activity.user.avatar, alt: "activity.user.name",
+          size: Settings.mini_avater, class: "avatar"), activity.user %>
+      <% else %>
+        <%= link_to image_tag(Settings.default_user_image, alt: activity.user.name,
+          size: Settings.mini_avater, class: "avatar" ), activity.user %>
+      <% end %>
+      <%= link_to activity.user.name,activity.user %>
+    <% case activity.target_type %>
+    <% when Lesson.name %>
+      <% info = activity.get_activity_info_lesson %>
+      <i> <%= info[:action] %> :</i>
+      <%= link_to info[:lesson].name,edit_lesson_result_path(info[:lesson],info[:target]) if info[:found_target] %>
+      <small class="pull-right">
+        <%= t ".action_at",time: time_ago_in_words(activity.created_at) %>
+      </small>
+    <% when User.name %>
+      <% info = activity.get_activity_info_user %>
+      <i> <%= info[:action] %> :</i>
+      <% if info[:found_target] %>
+        <% if info[:target].avatar? %>
+          <%= link_to image_tag(info[:target].avatar, alt: "info[:target].name",
+            size: Settings.mini_avater, class: "avatar"), info[:target] %>
+        <% else %>
+          <%= link_to image_tag(Settings.default_user_image, alt: info[:target].name,
+            size: Settings.mini_avater, class: "avatar" ), info[:target] %>
+        <% end %>
+        <%= link_to info[:target].name,info[:target] %>
+      <% else %>
+        <%= image_tag Settings.default_user_image, alt: info[:target],
+          size: Settings.mini_avater, class: "avatar" %>
+        <%= info[:target] %>
+      <% end %>
+      <small class="pull-right">
+        <%= t ".action_at",time: time_ago_in_words(activity.created_at) %>
+      </small>
+    <% end %>
+    </li>
+<% end %>

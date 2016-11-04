@@ -1,0 +1,32 @@
+<h3><%= t ".lesson" %></h3>
+<%= form_for @lesson do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name,class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id %>
+    <%= f.select :category_id,
+      options_for_select(Category.all.map{ |c| ["#{c.id} - #{c.name}", c.id]}),
+      {},
+      class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <div class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <%= f.label :number_of_words %>
+        <%= f.number_field :number_of_words, min: 1, max: @number_max_of_words, step: 1,
+          class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <%= f.label :time %>
+        <%= f.number_field :time, step: 1, class: "form-control"%>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.submit yield(:button_text), class: "btn btn-primary form-control" %>
+  </div>
+<% end %>

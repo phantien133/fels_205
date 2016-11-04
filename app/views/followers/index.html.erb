@@ -1,0 +1,5 @@
+<% provide :title, t(".title",name: @user.name) %>
+<% provide :header_title, t(:all) %>
+<% provide :search_id, "search_follows_box" %>
+<% provide :path_search, user_followers_path(@user) %>
+<%= render "users/users" %>

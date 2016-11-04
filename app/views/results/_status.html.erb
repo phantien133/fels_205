@@ -1,0 +1,9 @@
+<% if @status %>
+  <label class="alert alert-success text-center">
+    <%= t ".save" %>
+  </label>
+<% else %>
+  <label class="alert alert-danger text-center">
+    <%= t ".not_save" %>
+  </label>
+<% end %>

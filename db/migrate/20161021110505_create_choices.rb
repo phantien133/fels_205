@@ -2,8 +2,8 @@ class CreateChoices < ActiveRecord::Migration[5.0]
   def change
     create_table :choices do |t|
       t.references :result, foreign_key: true
-      t.references :anser, foreign_key: true
-      t.references :word_id, foreign_key: true
+      t.references :answer, foreign_key: true
+      t.references :word, foreign_key: true
 
       t.timestamps
     end

@@ -2,23 +2,26 @@
   <div class="row text-center">
     <% if user.avatar? %>
       <%= link_to image_tag(user.avatar, alt: "user.name", size: "100x100",
-        class: "avatar")%>
+        class: "avatar"), user%>
     <% else %>
       <%= link_to image_tag(Settings.default_user_image, alt: user.name,
         size: "100x100", class: "avatar" ), user %>
     <% end %>
   </div>
   <div class="row text-center">
-    <div class="form-inline row">
-      <%= button_tag t(".follow"), class: "btn btn-default" %>
-      <% if logged_in? && current_user.admin? %>
-        <%= button_tag t(:delete),class: "btn btn-danger",
-          onclick: "deleteUser('#{user.id}', '#{t(:confirm_delete,
-          type: t(:user), name: user.name)}')" %>
-      <% end %>
+    <% if logged_in? && current_user != user %>
+      <div class="row">
+        <% if current_user.admin? %>
+          <%= button_tag t(:delete),class: "btn btn-danger",
+            onclick: "deleteUser('#{user.id}', '#{t(:confirm_delete,
+            type: t(:user), name: user.name)}')" %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="row">
+      <p><%= link_to user.name, user, class: "form-label" %></p>
+      <p><%= user.birthday %></p>
+      <p><%= user.sex %></p>
     </div>
-    <%= link_to user.name, user, class: "form-label" %>
-    <p><%= user.birthday %></p>
-    <p><%= user.sex %></p>
   </div>
 </div>

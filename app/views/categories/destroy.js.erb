@@ -1,0 +1,13 @@
+if (confirm('<%= @status %>') == true) {
+  $.ajax({
+    type: 'DELETE',
+    url: '<%= "/categories/#{@id}?confirm=true" %>',
+    success: function(data){
+      alert(data.status);
+      $('#tr_category_id_<%= @id %>').remove();
+    },
+    error: function(error_message) {
+      connect_failed.show();
+    },
+  });
+}

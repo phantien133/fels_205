@@ -1,21 +1,40 @@
 <% provide :title, t(".title")%>
-<div class="row">
-</div>
+<% provide :button_text, t(".btn_text")%>
 <div class="row">
   <div class="col-md-2 col-xs-12">
     <h1><%= t ".title" %></h1>
+    <% if logged_in? && current_user.admin %>
+      <%= link_to "#",
+        data: {toggle: "modal", target: "#new-lesson-modal"},
+        class: "btn btn-primary" do %>
+        <i class="glyphicon glyphicon-pencil" ></i>
+        <%= t ".add_new_lesson" %>
+      <% end %>
+    <% end %>
   </div>
   <div class="col-md-10 col-xs-12">
     <div class="row">
-      <%= form_tag lessons_path, method: :get, id: "search_category_form" do %>
+      <%= form_tag lessons_path, method: :get, id: "search_lessons_form" do %>
         <div class="form-inline pull-right">
+          <% if logged_in? %>
+            <div class="form-group">
+              <% Settings.filter_words.each do |key, value| %>
+                <%= label_tag value, class: "radio-inline" do %>
+                  <%= radio_button_tag :condition, value,
+                    checked = params[:condition] == value || params[:condition].blank?,
+                    onchange: "submit_lessons_search_form();" %>
+                  <%= value.titleize %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
           <div class="form-group">
             <%= label_tag :Category %>
             <%= select_tag "category_id",
               options_from_collection_for_select(Category.all,
               "id", "name", params[:category_id]), include_blank: t("all"),
               class: "form-control",
-              onchange: "search_lessons_by_category_id(this);",
+              onchange: "submit_lessons_search_form();",
               id: "select_category_id"%>
           </div>
           <div class="form-group">
@@ -63,4 +82,28 @@
     </div>
   </div>
 </div>
-
+<% if logged_in? && current_user.admin %>
+  <div class="modal fade" id="new-lesson-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h3 class="modal-title glyphicon glyphicon-edit">
+            <%= t ".lesson" %>
+          </h3>
+        </div>
+        <div class="modal-body">
+          <%= render "form" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"
+            data-dismiss="modal">
+            <%= t ".close" %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

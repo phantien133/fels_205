@@ -1,0 +1,32 @@
+<h1><%= yield(:header_title) %></h1>
+<%= form_tag yield(:path_search), method: :get, id: "search_users" do %>
+  <div class="row panel">
+    <div class="input-group pull-right">
+      <%= text_field_tag :key, params[:key], id: yield(:search_id),
+        class: "form-control", placeholder: t(".placeholder") %>
+      <div class="input-group-btn">
+        <%= submit_tag t(:search), class: "btn btn-info" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<hr>
+<div class="alert alert-danger" id="connect_failed" hidden="true">
+  <label >
+    <%= t :failed_connection %>
+  </label>
+</div>
+<div id="result_search" class="row" >
+  <div class= "row" >
+    <% if @users.any? %>
+      <%= render @users %>
+    <% end %>
+  </div>
+  <% if @users.any? %>
+      <div class="row text-center" id="will_paginate">
+        <%= will_paginate @users %>
+      </div>
+    <% end %>
+
+</div>
+

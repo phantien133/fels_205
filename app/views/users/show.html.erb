@@ -1,0 +1,19 @@
+<% provide :title, t(".title", name: @user.name) %>
+<div class="row">
+  <%= render "users/user_info" %>
+  <div class="col-md-7 col-xs-12">
+    <div class="col-md-12 panel panel-success">
+      <div class="panel-heading">
+        <h1 class="panel-title title_header"><%= t ".activities" %></h1>
+      </div>
+      <div class="panel-body" id="panel-activities">
+        <% if @activities.any? %>
+          <%= render @activities %>
+          <div class="row pull-right">
+            <%= will_paginate @activities %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

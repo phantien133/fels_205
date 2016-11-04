@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   $('#search_categories').keyup(function () {
     key = $(this).val();
@@ -98,19 +97,11 @@ function make_paginate(current,total_entries,per_page,key){
 
 }
 function delete_category(id, name) {
-  if (confirm(id + ' : ' + name) == true) {
-    $.ajax({
-      type: 'DELETE',
-      url: '/categories/' + id,
-      success: function(data){
-        alert(data.status);
-        $('#tr_category_id_' + id).remove();
-      },
-      error: function(error_message) {
-        connect_failed.show();
-      },
-    });
-  }
+  $.ajax({
+    type: 'DELETE',
+    url: '/categories/' + id,
+    dataType: 'script'
+  });
 }
 function edit_category(id){
   $.ajax({

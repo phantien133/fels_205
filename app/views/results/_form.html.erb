@@ -1,0 +1,36 @@
+<%= form_for [@lesson,@result], html: {id: "result-form"}, remote: true do |f| %>
+  <%= f.fields_for :choices, @choices do |f_choice| %>
+    <div class="col-md-12 question well">
+      <strong>
+        <%= f_choice.index + 1 %>. <%= f_choice.object.word.content %>
+      </strong>
+    </div>
+    <div class="col-md-12 answers">
+      <% f_choice.object.word.answers.each do |answer| %>
+        <div class="option">
+          <%= f_choice.radio_button :answer_id, answer.id,disabled: @result.finished,
+            checked: answer.id == f_choice.object.answer_id %>
+          <%= f_choice.label "answer_id_#{answer.id}",
+            answer.content, class: "font-weight-normal" %>
+        </div>
+      <% end %>
+      <% if @result.finished %>
+       <div class="row">
+          <% if f_choice.object.word.correct_answer.id == f_choice.object.answer_id %>
+            <p class="label label-success"><%= t ".correct" %></p>
+          <% else %>
+            <p class="label label-danger"><%= t ".incorrect" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <% unless @result.finished %>
+    <div class="col-md-12 text-center btn-nav">
+      <hr>
+      <%= hidden_field_tag :auto_commit %>
+      <%= f.submit t(:save), class: "btn btn-success" %>
+      <%= f.submit t(:finish), class: "btn btn-success" %>
+    </div>
+  <% end %>
+<% end %>

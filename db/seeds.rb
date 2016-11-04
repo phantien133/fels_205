@@ -26,21 +26,25 @@ User.create!(
   )
 end
 50.times do |n|
-  name = Faker::Name.name
+  name = "Category #{n}"
   Category.create! name: name
 end
-category = Category.first
-50.times do |n|
-  word = Word.create content: Faker::Name.name, category_id: category.id
-  if n % 2 == 0
+categorires = Category.first(5)
+categorires.each do |category|
+  50.times do |n|
+    word = Word.create content: "word #{n}", category_id: category.id
     5.times do |m|
-      correct = m % 2 == 1 ? true : false
-      word.answers.create content: Faker::Name.name, correct: correct
+      correct = m == n % 5 ? true : false
+      word.answers.create(content: "answers #{n} #{m}", correct: correct)
     end
-  else
-    5.times do |m|
-      correct = m ==3 ? true : false
-      word.answers.create content: Faker::Name.name, correct: correct
-    end
+  end
+end
+user = User.first
+categorires.each do |category|
+  20.times do |n|
+    number_of_words = n + 1
+    time = n+2
+    lesson = user.lessons.create name: "lesson #{n}", category_id: category.id,
+      number_of_words: number_of_words, time: time
   end
 end

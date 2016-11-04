@@ -5,29 +5,30 @@
     <h2> <%= t :category %><h2>
     <h1 id="category_show_name"><%= @category.name %></h1>
   </div>
-
   <div class="col-md-8 col-xs-12">
     <div class="row">
       <%= render "form" %>
     </div>
     <hr>
-    <div class="row">
-      <div class="panel panel-control">
-        <%= link_to "#",
-          data: {toggle: "modal", target: "#new-lesson-modal"},
-          class: "btn btn-primary" do %>
-          <i class="glyphicon glyphicon-pencil" ></i>
-          <%= t ".add_new_lesson" %>
-        <% end %>
-        <%= link_to "#",
-          data: {toggle: "modal", target: "#new-word-modal"},
-          class: "btn btn-primary" do %>
-          <i class="glyphicon glyphicon-pencil" ></i>
-          <%= t ".add_new_word" %>
-        <% end %>
+    <% if logged_in? && current_user.admin? %>
+      <div class="row">
+        <div class="panel panel-control">
+          <%= link_to "#",
+            data: {toggle: "modal", target: "#new-lesson-modal"},
+            class: "btn btn-primary" do %>
+            <i class="glyphicon glyphicon-pencil" ></i>
+            <%= t ".add_new_lesson" %>
+          <% end %>
+          <%= link_to "#",
+            data: {toggle: "modal", target: "#new-word-modal"},
+            class: "btn btn-primary" do %>
+            <i class="glyphicon glyphicon-pencil" ></i>
+            <%= t ".add_new_word" %>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <hr>
+      <hr>
+    <% end %>
     <div class="row">
       <table class="table table-hover table-striped">
         <thead>
@@ -46,60 +47,62 @@
         <tbody id="result_search">
           <% if @lessons.any? %>
             <%= render @lessons %>
-            <%= will_paginate @lessons %>
           <% end %>
         </tbody>
       </table>
+      <% if @lessons.any? %>
+        <%= will_paginate @lessons %>
+      <% end %>
     </div>
   </div>
 </div>
 <div class="modal fade" id="new-lesson-modal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
-          <h3 class="modal-title glyphicon glyphicon-edit">
-            <%= t ".lesson" %>
-          </h3>
-        </div>
-        <div class="modal-body">
-          <%= form_for @lesson do |f| %>
-            <div class="form-group">
-              <%= f.label :name %>
-              <%= f.text_field :name,class: "form-control" %>
-              <%= f.hidden_field :category_id%>
-            </div>
-            <div class="form-group">
-              <div class="col-md-6 col-xs-12">
-                <div class="form-group">
-                  <%= f.label :number_of_words %>
-                  <%= f.number_field :number_of_words, min: 1,
-                    max: @number_max_of_words, step: 1, class: "form-control" %>
-                </div>
-              </div>
-              <div class="col-md-6 col-xs-12">
-                <div class="form-group">
-                  <%= f.label :time %>
-                  <%= f.number_field :time, step: 1, min: 1, class: "form-control" %>
-                </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+        <h3 class="modal-title glyphicon glyphicon-edit">
+          <%= t ".lesson" %>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <%= form_for @lesson do |f| %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name,class: "form-control" %>
+            <%= f.hidden_field :category_id%>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-xs-12">
+              <div class="form-group">
+                <%= f.label :number_of_words %>
+                <%= f.number_field :number_of_words, min: 1,
+                  max: @number_max_of_words, step: 1, class: "form-control" %>
               </div>
             </div>
-            <div class="form-group">
-              <%= f.submit t(".btn_text"), class: "btn btn-primary form-control" %>
+            <div class="col-md-6 col-xs-12">
+              <div class="form-group">
+                <%= f.label :time %>
+                <%= f.number_field :time, step: 1, min: 1, class: "form-control" %>
+              </div>
             </div>
-          <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default"
-            data-dismiss="modal">
-            <%= t ".close" %>
-          </button>
-        </div>
+          </div>
+          <div class="form-group">
+            <%= f.submit t(".btn_text"), class: "btn btn-primary form-control" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+          data-dismiss="modal">
+          <%= t ".close" %>
+        </button>
       </div>
     </div>
   </div>
+</div>
 <div class="modal fade" id="new-word-modal" role="dialog">
   <div class="modal-dialog  modal-lg">
     <div class="modal-content">
