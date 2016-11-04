@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   end
 
   resources :words
+  post "create_word", to: "words#create"
 end

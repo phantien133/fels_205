@@ -17,7 +17,7 @@ class Result < ApplicationRecord
       words_test.each do |word|
         choice = self.choices.build word_id: word.id
         unless choice.save
-          self.errors[:base] << t :word_not_enough
+          self.errors.add :words_test, I18n.t(:word_not_enough)
         end
       end
     end

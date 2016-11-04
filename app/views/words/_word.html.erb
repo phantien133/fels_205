@@ -1,0 +1,32 @@
+<tr id="tr_word_id_<%= word.id %>" data-toggle="collapse"
+  data-target="#answers_word_id_<%= word.id %>" >
+  <td><%= link_to word.id,edit_word_path(word) %></td>
+  <td><%= word.content %></td>
+  <td><%= word.category.name %></td>
+  <td><%= word.created_at %></td>
+</tr>
+<tr id="answers_word_id_<%= word.id %>" class="collapse">
+  <td></td>
+  <td colspan="3">
+    <table class="table table-hover">
+      <thead>
+        <th><%= t ".answer" %></th>
+        <th><%= t ".correct" %></th>
+      </thead>
+      <tbody>
+        <% word.answers.each do |answer| %>
+          <tr>
+            <td><%= answer.content %></td>
+            <td>
+              <% if answer.correct %>
+                <input type="checkbox" checked disabled>
+              <% else %>
+                <input type="checkbox" disabled>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </td>
+</tr>
