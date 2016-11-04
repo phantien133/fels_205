@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   end
 
   resources :words
+
+  resources :answers, only: :destroy
 end

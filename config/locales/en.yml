@@ -56,7 +56,9 @@ en:
   time_and_number_validates: "time to do and number of words in a lesson is an integer and more than 0 "
   words_have_lost: "Many words in category was lost"
   lesson_not_found: "Lesson not found"
-  word_not_enough: "Words not enough "
+  word_not_enough: "Words not enough"
+  word_should_have: "Word should be have more than an answer, at a correct answer"
+  get_all: "get_all"
   header:
     categories: "Categories"
     words: "Words"
@@ -119,19 +121,26 @@ en:
     new:
       word: "Word"
       new_answers: "Add new answer"
-      answer: "Answer"
-      button_text: "Create word"
-      correct: "Correct"
+      button_text: "Create Word"
+    edit:
+      title: "Edit word"
+      new_answers: "Add new answer"
+      button_text: "Save Word"
     create:
-      word_cant_be_blank: " Word can't be blank"
-      word_should_have: "Word should be have more than an answer, at least a correct answer"
+      word_should_have: "Word should be have more than an answer, at a correct answer"
       least_then_2_answer: "Least then 2 answer"
       null_correct: "Null correct answer"
       word_belong_to_category: "Word belong to category"
       answer_content_cant_be_blank: "Answer content can't be blank"
     index:
+      title: "Words"
       all: "All words"
       word: "Word"
+    form:
+      answers: "Answers"
+      answer: "Answer"
+      correct: "Correct"
+      button_text: "Create word"
   lessons:
     lesson:
       start_lesson: "Start lesson"
@@ -142,3 +151,9 @@ en:
       title: "Lessons"
       number_of_words: "Number of words"
       time: "Time"
+  answers:
+    destroy:
+      error_destroy_correct_answer: "Change correct answer of word before remove answer"
+      answer_not_found: "Answers not found"
+      success: "Answer destroyed"
+      failed: "Can't destroyed answers"

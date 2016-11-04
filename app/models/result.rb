@@ -12,12 +12,12 @@ class Result < ApplicationRecord
 
   private
     def create_test
-      words_test = self.lession.category.words.random_words
-        .limit self.lession.number_of_words
+      words_test = lession.category.words.random_words
+        .limit lession.number_of_words
       words_test.each do |word|
-        choice = self.choices.build word_id: word.id
+        choice = choices.build word_id: word.id
         unless choice.save
-          self.errors[:base] << t :word_not_enough
+          errors.add :words_test, I18n.t(:word_not_enough)
         end
       end
     end

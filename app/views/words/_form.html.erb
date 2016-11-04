@@ -1,0 +1,51 @@
+<% if logged_in? && current_user.admin? %>
+  <%= form_for @word do |f| %>
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_area :content, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :category_id %>
+        <%= f.select :category_id,
+          options_from_collection_for_select(@all_categories, "id", "name",
+          params[:category_id]), {}, class: "form-control" %>
+      </div>
+      <hr>
+      <div class="row">
+        <h4><%= t ".answers" %></h4>
+        <div class="col-md-10 col-xs-11 pull-right">
+          <div id="answer-fields">
+            <% if @word.answers.any? %>
+              <%= f.fields_for :answers do |answer| %>
+                <div id="answer_<%= answer.index %>" class="row form-group">
+                  <%= answer.hidden_field :id %>
+                  <div class="col-md-1">
+                    <%= label_tag :content,
+                      onclick: "destroy_old_answer(#{answer.object.id},#{answer.index})" do %>
+                      <i  class="pull-left btn glyphicon glyphicon-remove"></i>
+                    <% end %>
+                  </div>
+                  <div class="col-md-8 form-group">
+                    <%= answer.text_area :content, label: false,
+                      class: "form-control" %>
+                  </div>
+                  <div class="col-md-3">
+                    <% if answer.object.correct %>
+                    <% end %>
+                    <%= answer.check_box :correct, {class: "option_checkbox"}, "1", "0" %>
+                    <%= answer.label :correct %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <label class="btn btn-default form-control" id="btn_add_new_answer"
+            onclick="add_new_answer('<%= t ".answer" %>', '<%= t ".correct" %>')">
+            <i class="glyphicon glyphicon-edit"></i>
+            <%= t ".new_answers" %>
+          </label>
+        </div>
+      </div>
+    <%= f.submit yield(:button_text), class: "btn btn-primary form-control" %>
+  <% end %>
+<% end %>

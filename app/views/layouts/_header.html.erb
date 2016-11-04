@@ -16,12 +16,11 @@
       <ul class="nav navbar-nav" >
         <% if logged_in? %>
           <li class="header-nav-item" >
-            <a class="hear-item">
-              <i href="#words"
-                class="glyphicon glyphicon-book" >
-              </i>
+            <%= link_to words_path, data: {turbolinks: false},
+              class: "hear-item" do %>
+              <i class="glyphicon glyphicon-book" ></i>
               <%= t ".words" %>
-            </a>
+              <% end %>
           </li>
           <li class="header-nav-item" >
             <%= link_to lessons_path, data: {turbolinks: false},
@@ -101,14 +100,6 @@
     </div>
     <div id="admin" class="collapse">
       <ul class="nav navbar-nav" >
-        <li class="header-nav-item" >
-          <a class="hear-item">
-            <i href="#words"
-              class="glyphicon glyphicon-list-alt" >
-            </i>
-            <%= t ".words" %>
-          </a>
-        </li>
         <li class="header-nav-item" >
           <a class="hear-item">
             <i href="#words"

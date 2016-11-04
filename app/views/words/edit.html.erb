@@ -1,8 +1,10 @@
 <% provide :title, t(".title") %>
 <% provide :button_text, t(".button_text") %>
-<h1><%= t :signup %></h1>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-2 col-xs-2">
+    <h1><%= t ".word" %></h1>
+  </div>
+  <div class="col-md-8 col-xs-12">
     <%= render "form" %>
   </div>
 </div>

@@ -6,5 +6,19 @@ default_favicon_image: "elearning.png"
 
 min_time: 0
 min_words: 0
+min_of_answers: 2
 
 words: 20
+
+true_str: "true"
+false_str: "false"
+
+max_length_of_content: 1000
+
+filter_words:
+  learned: "learned"
+  not_learned: "not_learned"
+  get_all: "get_all"
+
+min_of_answers: 2
+number_of_correct_answers: 1
