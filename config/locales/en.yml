@@ -74,6 +74,8 @@ en:
       close: "Close"
       remember_me: "Remember me"
   users:
+    show:
+      title: "User | %{name}"
     edit:
       title: "Edit profile"
       btn_text: "Update my profile"
@@ -84,12 +86,22 @@ en:
       btn_text: "Create my account"
     index:
       title: "All Users"
-      placeholder: "Enter here"
       all: "All users"
-      deleted: "User : %{name} be deleted"
-      failed: "Failde to delete user %{name}"
     user:
       follow: "Follow"
+    user_info:
+      birthday: "Birthday : %{birthday}"
+      address: "Address : %{address}"
+      following: "following"
+      followers: "followers"
+    users:
+      deleted: "User : %{name} be deleted"
+      failed: "Failde to delete user %{name}"
+      placeholder: "Enter here"
+    follow:
+      follow: "Follow"
+    unfollow:
+      unfollow: "Unfollow"
   categories:
     show:
       title: "Category | %{name}"
@@ -144,3 +156,11 @@ en:
       title: "Lessons"
       number_of_words: "Number of words"
       time: "Time"
+  followers:
+    index:
+      header_title: "Followers"
+      title: "%{name} | Followers"
+  following:
+    index:
+      title: "%{name} | Following"
+      header_title: "Following"

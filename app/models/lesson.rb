@@ -3,9 +3,9 @@ class Lesson < ApplicationRecord
   has_many :results
 
   validates :user_id, presence: true
-  validates :number_of_words, presence: true, length: {minimum: 1}, allow_nil: true
-  validates :time, presence: true, length: {minimum: 1}, allow_nil: true
-  validate :check_access_category
+  validates :number_of_words, presence: true, length: {minimum: 1}
+  validates :time, presence: true, length: {minimum: 1}
+  before_save :check_access_category
 
   scope :of_category, ->category_id {where(category_id: category_id)}
   scope :search, ->keyword {where "name LIKE ?", "%#{keyword}%"}

@@ -13,7 +13,7 @@ class LessonsController < ApplicationController
     if @lesson.save
       flash[:success] = t :created_at
     else
-      flash[:danger] = @lesson.errors.full_messagesjoin "\n"
+      flash[:danger] = @lesson.errors.full_messages.join ".\n"
     end
     redirect_to session[:forwarding_url] || new_lesson_path
   end
